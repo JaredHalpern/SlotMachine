@@ -13,17 +13,28 @@
 @property (nonatomic, strong) SKSpriteNode      *spriteNode;
 @property (nonatomic)         CGFloat           timeDiff;
 @property (nonatomic)         CFTimeInterval    lastUpdateTime;
-
+@property (nonatomic, strong) NSMutableArray    *slotSpeeds;
 @end
 
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
     
+    self.slotSpeeds = [@[] mutableCopy];
     
     //1080 x 1350 = 0.80
     UIImage *mainImage = [UIImage imageNamed:@"drewandinewyears2016.jpg"];
     NSMutableArray *imagePieces = [mainImage sliceImageIntoVerticalPieces:2]; // only supports two at the moment
+    
+    NSInteger num = 0;
+    NSInteger lowerBound = 2800;
+    NSInteger upperBound = 4200;
+    for (NSInteger i = 0; i < imagePieces.count; i++) {
+        num = lowerBound + ((float)arc4random() / UINT32_MAX) * (upperBound - lowerBound);
+        [self.slotSpeeds addObject:[NSNumber numberWithFloat:num]];
+    }
+    
+    NSLog(@"%@", self.slotSpeeds);
     
     NSInteger startingX = 0.0;
     
@@ -43,16 +54,24 @@
 
 - (void)moveSlots {
     
+    __block NSInteger nodeNum = 0;
+    __weak GameScene *welf = self;
+    
     [self enumerateChildNodesWithName:@"slot" usingBlock:^(SKNode * _Nonnull node, BOOL * _Nonnull stop) {
 
         SKSpriteNode *slot = (SKSpriteNode *)node;
-        CGPoint slotVelocity = CGPointMake(0, -100.0);
+        CGPoint slotVelocity = CGPointMake(0, -([welf.slotSpeeds[nodeNum] integerValue]));
         CGPoint amtToMove = CGPointMake(slotVelocity.x * self.timeDiff, slotVelocity.y * self.timeDiff);
         slot.position = CGPointMake(slot.position.x + amtToMove.x, slot.position.y + amtToMove.y);
         
         //Checks if node is completely scrolled of the screen, if yes then put it at the top of the node
         if (slot.position.y <= -slot.size.height) {
             slot.position = CGPointMake(slot.position.x, slot.position.y + slot.size.height * 2);
+        }
+        
+        nodeNum++;
+        if (nodeNum >= welf.slotSpeeds.count) {
+            nodeNum = 0;
         }
     }];
 }
