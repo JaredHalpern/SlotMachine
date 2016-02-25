@@ -29,6 +29,7 @@
     NSInteger num = 0;
     NSInteger lowerBound = 2800;
     NSInteger upperBound = 4200;
+    // http://stackoverflow.com/a/24836267/885189
     for (NSInteger i = 0; i < imagePieces.count; i++) {
         num = lowerBound + ((float)arc4random() / UINT32_MAX) * (upperBound - lowerBound);
         [self.slotSpeeds addObject:[NSNumber numberWithFloat:num]];
