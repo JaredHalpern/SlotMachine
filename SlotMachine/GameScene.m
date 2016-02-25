@@ -21,7 +21,7 @@
     UIImage *mainImage = [UIImage imageNamed:@"drewandinewyears2016.jpg"];
     NSMutableArray *imagePieces = [mainImage sliceImageIntoVerticalPieces:2]; // only supports two at the moment
     
-    NSInteger startingX = 300.0;
+    NSInteger startingX = 00.0;
     
     for (UIImage *singleImage in imagePieces) {
         
@@ -29,7 +29,9 @@
         self.spriteNode = [SKSpriteNode spriteNodeWithTexture:imageTexture];
         self.spriteNode.anchorPoint = CGPointMake(0., 0.);
         self.spriteNode.position = CGPointMake(startingX, 300);
-        self.spriteNode.size = CGSizeMake(240, 300);
+//        self.spriteNode.size = CGSizeMake(240, 300);
+        self.spriteNode.xScale = 0.20;
+        self.spriteNode.yScale = 0.25;
         [self addChild:self.spriteNode];
         startingX += 240;
     }
