@@ -20,6 +20,7 @@
 		7FA3FA631C7EA6C500245AD8 /* UIImage+AlphaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3FA5D1C7EA6C500245AD8 /* UIImage+AlphaAdditions.m */; };
 		7FA3FA641C7EA6C500245AD8 /* UIImage+ResizeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3FA5F1C7EA6C500245AD8 /* UIImage+ResizeAdditions.m */; };
 		7FA3FA651C7EA6C500245AD8 /* UIImage+RoundedCornerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3FA611C7EA6C500245AD8 /* UIImage+RoundedCornerAdditions.m */; };
+		7FA3FA691C7EAA3900245AD8 /* UIImage+Slice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3FA681C7EAA3900245AD8 /* UIImage+Slice.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,8 @@
 		7FA3FA601C7EA6C500245AD8 /* UIImage+RoundedCornerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCornerAdditions.h"; sourceTree = "<group>"; };
 		7FA3FA611C7EA6C500245AD8 /* UIImage+RoundedCornerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCornerAdditions.m"; sourceTree = "<group>"; };
 		7FA3FA661C7EA83200245AD8 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		7FA3FA671C7EAA3900245AD8 /* UIImage+Slice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Slice.h"; sourceTree = "<group>"; };
+		7FA3FA681C7EAA3900245AD8 /* UIImage+Slice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Slice.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +119,8 @@
 				7FA3FA5F1C7EA6C500245AD8 /* UIImage+ResizeAdditions.m */,
 				7FA3FA601C7EA6C500245AD8 /* UIImage+RoundedCornerAdditions.h */,
 				7FA3FA611C7EA6C500245AD8 /* UIImage+RoundedCornerAdditions.m */,
+				7FA3FA671C7EAA3900245AD8 /* UIImage+Slice.h */,
+				7FA3FA681C7EAA3900245AD8 /* UIImage+Slice.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 				7FA3FA631C7EA6C500245AD8 /* UIImage+AlphaAdditions.m in Sources */,
 				7FA3FA481C7EA57900245AD8 /* GameViewController.m in Sources */,
 				7FA3FA401C7EA57900245AD8 /* AppDelegate.m in Sources */,
+				7FA3FA691C7EAA3900245AD8 /* UIImage+Slice.m in Sources */,
 				7FA3FA431C7EA57900245AD8 /* GameScene.m in Sources */,
 				7FA3FA621C7EA6C500245AD8 /* UIImage+Alpha.m in Sources */,
 				7FA3FA641C7EA6C500245AD8 /* UIImage+ResizeAdditions.m in Sources */,

@@ -7,15 +7,32 @@
 //
 
 #import "GameScene.h"
+#import "UIImage+Slice.h"
+
+@interface GameScene ()
+@property (nonatomic, strong) SKSpriteNode *spriteNode;
+@end
 
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
     
+    //1080 x 1350 = 0.80
+    UIImage *mainImage = [UIImage imageNamed:@"drewandinewyears2016.jpg"];
+    NSMutableArray *imagePieces = [mainImage sliceImageIntoVerticalPieces:2]; // only supports two at the moment
     
+    NSInteger startingX = 300.0;
     
-    
-
+    for (UIImage *singleImage in imagePieces) {
+        
+        SKTexture *imageTexture = [SKTexture textureWithImage:singleImage];
+        self.spriteNode = [SKSpriteNode spriteNodeWithTexture:imageTexture];
+        self.spriteNode.anchorPoint = CGPointMake(0., 0.);
+        self.spriteNode.position = CGPointMake(startingX, 300);
+        self.spriteNode.size = CGSizeMake(240, 300);
+        [self addChild:self.spriteNode];
+        startingX += 240;
+    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
