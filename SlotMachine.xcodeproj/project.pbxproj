@@ -15,6 +15,11 @@
 		7FA3FA4B1C7EA57900245AD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA3FA491C7EA57900245AD8 /* Main.storyboard */; };
 		7FA3FA4D1C7EA57900245AD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FA3FA4C1C7EA57900245AD8 /* Assets.xcassets */; };
 		7FA3FA501C7EA57900245AD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA3FA4E1C7EA57900245AD8 /* LaunchScreen.storyboard */; };
+		7FA3FA581C7EA69800245AD8 /* drewandinewyears2016.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FA3FA571C7EA69800245AD8 /* drewandinewyears2016.jpg */; };
+		7FA3FA621C7EA6C500245AD8 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3FA5B1C7EA6C500245AD8 /* UIImage+Alpha.m */; };
+		7FA3FA631C7EA6C500245AD8 /* UIImage+AlphaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3FA5D1C7EA6C500245AD8 /* UIImage+AlphaAdditions.m */; };
+		7FA3FA641C7EA6C500245AD8 /* UIImage+ResizeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3FA5F1C7EA6C500245AD8 /* UIImage+ResizeAdditions.m */; };
+		7FA3FA651C7EA6C500245AD8 /* UIImage+RoundedCornerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA3FA611C7EA6C500245AD8 /* UIImage+RoundedCornerAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +36,15 @@
 		7FA3FA4C1C7EA57900245AD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FA3FA4F1C7EA57900245AD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7FA3FA511C7EA57900245AD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FA3FA571C7EA69800245AD8 /* drewandinewyears2016.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = drewandinewyears2016.jpg; sourceTree = "<group>"; };
+		7FA3FA5A1C7EA6C500245AD8 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		7FA3FA5B1C7EA6C500245AD8 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		7FA3FA5C1C7EA6C500245AD8 /* UIImage+AlphaAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AlphaAdditions.h"; sourceTree = "<group>"; };
+		7FA3FA5D1C7EA6C500245AD8 /* UIImage+AlphaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AlphaAdditions.m"; sourceTree = "<group>"; };
+		7FA3FA5E1C7EA6C500245AD8 /* UIImage+ResizeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeAdditions.h"; sourceTree = "<group>"; };
+		7FA3FA5F1C7EA6C500245AD8 /* UIImage+ResizeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeAdditions.m"; sourceTree = "<group>"; };
+		7FA3FA601C7EA6C500245AD8 /* UIImage+RoundedCornerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCornerAdditions.h"; sourceTree = "<group>"; };
+		7FA3FA611C7EA6C500245AD8 /* UIImage+RoundedCornerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCornerAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +77,7 @@
 		7FA3FA3A1C7EA57900245AD8 /* SlotMachine */ = {
 			isa = PBXGroup;
 			children = (
+				7FA3FA591C7EA6C500245AD8 /* Categories */,
 				7FA3FA3E1C7EA57900245AD8 /* AppDelegate.h */,
 				7FA3FA3F1C7EA57900245AD8 /* AppDelegate.m */,
 				7FA3FA411C7EA57900245AD8 /* GameScene.h */,
@@ -82,9 +97,25 @@
 		7FA3FA3B1C7EA57900245AD8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7FA3FA571C7EA69800245AD8 /* drewandinewyears2016.jpg */,
 				7FA3FA3C1C7EA57900245AD8 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7FA3FA591C7EA6C500245AD8 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				7FA3FA5A1C7EA6C500245AD8 /* UIImage+Alpha.h */,
+				7FA3FA5B1C7EA6C500245AD8 /* UIImage+Alpha.m */,
+				7FA3FA5C1C7EA6C500245AD8 /* UIImage+AlphaAdditions.h */,
+				7FA3FA5D1C7EA6C500245AD8 /* UIImage+AlphaAdditions.m */,
+				7FA3FA5E1C7EA6C500245AD8 /* UIImage+ResizeAdditions.h */,
+				7FA3FA5F1C7EA6C500245AD8 /* UIImage+ResizeAdditions.m */,
+				7FA3FA601C7EA6C500245AD8 /* UIImage+RoundedCornerAdditions.h */,
+				7FA3FA611C7EA6C500245AD8 /* UIImage+RoundedCornerAdditions.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +175,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA3FA581C7EA69800245AD8 /* drewandinewyears2016.jpg in Resources */,
 				7FA3FA451C7EA57900245AD8 /* GameScene.sks in Resources */,
 				7FA3FA501C7EA57900245AD8 /* LaunchScreen.storyboard in Resources */,
 				7FA3FA4D1C7EA57900245AD8 /* Assets.xcassets in Resources */,
@@ -158,9 +190,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA3FA651C7EA6C500245AD8 /* UIImage+RoundedCornerAdditions.m in Sources */,
+				7FA3FA631C7EA6C500245AD8 /* UIImage+AlphaAdditions.m in Sources */,
 				7FA3FA481C7EA57900245AD8 /* GameViewController.m in Sources */,
 				7FA3FA401C7EA57900245AD8 /* AppDelegate.m in Sources */,
 				7FA3FA431C7EA57900245AD8 /* GameScene.m in Sources */,
+				7FA3FA621C7EA6C500245AD8 /* UIImage+Alpha.m in Sources */,
+				7FA3FA641C7EA6C500245AD8 /* UIImage+ResizeAdditions.m in Sources */,
 				7FA3FA3D1C7EA57900245AD8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
