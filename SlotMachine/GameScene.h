@@ -8,6 +8,12 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface GameScene : SKScene
+@protocol GameSceneDelegate <NSObject>
 
+//- (void)
+
+@end
+
+@interface GameScene : SKScene
+@property (nonatomic, weak) id <GameSceneDelegate> delegate;
 @end

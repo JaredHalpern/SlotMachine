@@ -14,6 +14,7 @@
 @property (nonatomic)         CGFloat           timeDiff;
 @property (nonatomic)         CFTimeInterval    lastUpdateTime;
 @property (nonatomic, strong) NSMutableArray    *slotSpeeds;
+@property (nonatomic, strong) NSMutableArray    *slotSpriteNodes;
 @end
 
 @implementation GameScene
@@ -21,6 +22,7 @@
 -(void)didMoveToView:(SKView *)view {
     
     self.slotSpeeds = [@[] mutableCopy];
+    self.slotSpriteNodes = [@[] mutableCopy];
     
     //1080 x 1350 = 0.80
     UIImage *mainImage = [UIImage imageNamed:@"drewandinewyears2016.jpg"];
@@ -29,6 +31,9 @@
     NSInteger num = 0;
     NSInteger lowerBound = 2800;
     NSInteger upperBound = 4200;
+//    NSInteger lowerBound = 28;
+//    NSInteger upperBound = 420;
+    
     // http://stackoverflow.com/a/24836267/885189
     for (NSInteger i = 0; i < imagePieces.count; i++) {
         num = lowerBound + ((float)arc4random() / UINT32_MAX) * (upperBound - lowerBound);
@@ -37,16 +42,16 @@
     
     NSLog(@"%@", self.slotSpeeds);
     
-    NSInteger startingX = 0.0;
+    NSInteger startingX = self.view.bounds.size.width/4; //0.0;
     
     for (UIImage *singleImage in imagePieces) {
         
         SKEffectNode *effectNode = [SKEffectNode node];
         [effectNode setShouldEnableEffects:NO];
-        CIFilter *blur = [CIFilter filterWithName:@"CIGaussianBlur" keysAndValues:@"inputRadius", @5.0f, nil];
+        CIFilter *blur = [CIFilter filterWithName:@"CIGaussianBlur" keysAndValues:@"inputRadius", @1.0f, nil];
         effectNode.filter = blur;
-        effectNode.name = @"slot";
-        effectNode.shouldEnableEffects = YES;
+        effectNode.shouldRasterize = YES; // cache
+//        effectNode.shouldEnableEffects = YES;
         
         SKTexture *imageTexture = [SKTexture textureWithImage:singleImage];
         self.spriteNode = [SKSpriteNode spriteNodeWithTexture:imageTexture];
@@ -54,8 +59,9 @@
         self.spriteNode.position = CGPointMake(startingX, 300);
         self.spriteNode.xScale = 0.20;
         self.spriteNode.yScale = 0.25;
-//        self.spriteNode.name = @"slot";
+        self.spriteNode.name = @"slot";
         
+        [self.slotSpriteNodes addObject:self.spriteNode];
         [effectNode addChild:self.spriteNode];
         [self addChild:effectNode];
         startingX += self.spriteNode.size.width + 8.0;
@@ -67,23 +73,26 @@
     __block NSInteger nodeNum = 0;
     __weak GameScene *welf = self;
     
-    [self enumerateChildNodesWithName:@"slot" usingBlock:^(SKNode * _Nonnull node, BOOL * _Nonnull stop) {
-
-        SKSpriteNode *slot = (SKSpriteNode *)node;
+//    [self enumerateChildNodesWithName:@"slot" usingBlock:^(SKNode * _Nonnull node, BOOL * _Nonnull stop) {
+    for (SKSpriteNode *node in self.slotSpriteNodes) {
+    
+        SKSpriteNode *slotNode = (SKSpriteNode *)node;
         CGPoint slotVelocity = CGPointMake(0, -([welf.slotSpeeds[nodeNum] integerValue]));
         CGPoint amtToMove = CGPointMake(slotVelocity.x, slotVelocity.y * self.timeDiff);
-        slot.position = CGPointMake(slot.position.x, slot.position.y + amtToMove.y);
+        slotNode.position = CGPointMake(slotNode.position.x, slotNode.position.y + amtToMove.y);
         
         //Checks if node is completely scrolled of the screen, if yes then put it at the top of the node
-        if (slot.position.y <= -slot.size.height) {
-            slot.position = CGPointMake(slot.position.x, slot.position.y + slot.size.height * 2);
+        if (slotNode.position.y <= -slotNode.size.height) {
+//        if (slotNode.position.y <= self.view.bounds.size.height/4) {
+            slotNode.position = CGPointMake(slotNode.position.x, slotNode.position.y + slotNode.size.height * 2);
         }
         
         nodeNum++;
         if (nodeNum >= welf.slotSpeeds.count) {
             nodeNum = 0;
         }
-    }];
+    }
+//    }];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -91,8 +100,6 @@
     
 //    for (UITouch *touch in touches) {
 //        CGPoint location = [touch locationInNode:self];
-        
-//        [self beginSpin];
 //    }
 }
 
@@ -106,7 +113,7 @@
     
     self.lastUpdateTime = currentTime;
     
-//    [self moveSlots];
+    [self moveSlots];
 }
 
 @end
