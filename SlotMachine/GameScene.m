@@ -41,14 +41,23 @@
     
     for (UIImage *singleImage in imagePieces) {
         
+        SKEffectNode *effectNode = [SKEffectNode node];
+        [effectNode setShouldEnableEffects:NO];
+        CIFilter *blur = [CIFilter filterWithName:@"CIGaussianBlur" keysAndValues:@"inputRadius", @5.0f, nil];
+        effectNode.filter = blur;
+        effectNode.name = @"slot";
+        effectNode.shouldEnableEffects = YES;
+        
         SKTexture *imageTexture = [SKTexture textureWithImage:singleImage];
         self.spriteNode = [SKSpriteNode spriteNodeWithTexture:imageTexture];
         self.spriteNode.anchorPoint = CGPointZero;
         self.spriteNode.position = CGPointMake(startingX, 300);
         self.spriteNode.xScale = 0.20;
         self.spriteNode.yScale = 0.25;
-        self.spriteNode.name = @"slot";
-        [self addChild:self.spriteNode];
+//        self.spriteNode.name = @"slot";
+        
+        [effectNode addChild:self.spriteNode];
+        [self addChild:effectNode];
         startingX += self.spriteNode.size.width + 8.0;
     }
 }
@@ -62,8 +71,8 @@
 
         SKSpriteNode *slot = (SKSpriteNode *)node;
         CGPoint slotVelocity = CGPointMake(0, -([welf.slotSpeeds[nodeNum] integerValue]));
-        CGPoint amtToMove = CGPointMake(slotVelocity.x * self.timeDiff, slotVelocity.y * self.timeDiff);
-        slot.position = CGPointMake(slot.position.x + amtToMove.x, slot.position.y + amtToMove.y);
+        CGPoint amtToMove = CGPointMake(slotVelocity.x, slotVelocity.y * self.timeDiff);
+        slot.position = CGPointMake(slot.position.x, slot.position.y + amtToMove.y);
         
         //Checks if node is completely scrolled of the screen, if yes then put it at the top of the node
         if (slot.position.y <= -slot.size.height) {
@@ -97,7 +106,7 @@
     
     self.lastUpdateTime = currentTime;
     
-    [self moveSlots];
+//    [self moveSlots];
 }
 
 @end
