@@ -19,34 +19,21 @@
 @property (nonatomic)         BOOL              slotsDoneSpinning;
 @end
 
+static const NSInteger slowestSpinSpeed = -4.0f;
+
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
     
-    self.timeDecayRate = 0.99;
-    self.slotsDoneSpinning = NO;
-    self.slotSpeeds = [@[] mutableCopy];
     self.slotSpriteNodes = [@[] mutableCopy];
+
+    NSInteger numSlots = 2;
+    
+    [self setupSpinForNumSlots:numSlots];
     
     //1080 x 1350 = 0.80
     UIImage *mainImage = [UIImage imageNamed:@"drewandinewyears2016.jpg"];
-    NSMutableArray *imagePieces = [mainImage sliceImageIntoVerticalPieces:2]; // only supports two at the moment
-    
-    NSInteger num = 0;
-    NSInteger lowerBound = 2800;
-    NSInteger upperBound = 4200;
-//    NSInteger lowerBound = 28;
-//    NSInteger upperBound = 420;
-    
-
-    
-    // http://stackoverflow.com/a/24836267/885189
-    for (NSInteger i = 0; i < imagePieces.count; i++) {
-        num = lowerBound + ((float)arc4random() / UINT32_MAX) * (upperBound - lowerBound);
-        [self.slotSpeeds addObject:[NSNumber numberWithFloat:-num]];
-    }
-    
-    NSLog(@"%@", self.slotSpeeds);
+    NSMutableArray *imagePieces = [mainImage sliceImageIntoVerticalPieces:numSlots]; // only supports two at the moment
     
     NSInteger startingX = self.view.bounds.size.width/4; //0.0;
     
@@ -75,6 +62,23 @@
     NSLog(@"slot height: %f", self.spriteNode.size.height);
 }
 
+- (void)setupSpinForNumSlots:(NSInteger)numSlots {
+    
+    self.timeDecayRate = 0.99;
+    self.slotsDoneSpinning = NO;
+    self.slotSpeeds = [@[] mutableCopy];
+
+    NSInteger num = 0;
+    NSInteger lowerBound = 2800;
+    NSInteger upperBound = 4200;
+    
+    // http://stackoverflow.com/a/24836267/885189
+    for (NSInteger i = 0; i <= numSlots; i++) {
+        num = lowerBound + ((float)arc4random() / UINT32_MAX) * (upperBound - lowerBound);
+        [self.slotSpeeds addObject:[NSNumber numberWithFloat:-num]];
+    }
+}
+
 - (void)moveSlots {
     
     NSInteger nodeNum = 0;
@@ -87,10 +91,10 @@
         
         self.slotSpeeds[nodeNum] = @(slotVelocity.y * self.timeDecayRate);
         
-        if (amtToMove.y >= -2.0) { // when we start slowing down; ie: between -2.0 and 0.0
+        if (amtToMove.y >= slowestSpinSpeed) { // when we start slowing down; ie: between -2.0 and 0.0
             
                 NSLog(@"position.y %f", slotNode.position.y);
-                amtToMove.y = -2.0;
+                amtToMove.y = slowestSpinSpeed;
         }
     
         // move slot
@@ -100,7 +104,7 @@
         if (slotNode.position.y <= -slotNode.size.height) {
             slotNode.position = CGPointMake(slotNode.position.x, slotNode.position.y + slotNode.size.height * 2);
             
-        } else if (slotNode.position.y <= 0.5 && amtToMove.y == -2.0) {
+        } else if (slotNode.position.y <= 0.5 && amtToMove.y == slowestSpinSpeed) {
             // otherwise slot is now at the lowest speed at which it will still move, and sliding one final loop until clicking into place
             // and stopping
             amtToMove.y = 0;
@@ -115,14 +119,6 @@
     }
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    /* Called when a touch begins */
-    
-//    for (UITouch *touch in touches) {
-//        CGPoint location = [touch locationInNode:self];
-//    }
-}
-
 -(void)update:(CFTimeInterval)currentTime {
 
     if (self.lastUpdateTime) {
@@ -133,7 +129,9 @@
     
     self.lastUpdateTime = currentTime;
     
-    [self moveSlots];
+    if (!self.slotsDoneSpinning) {
+        [self moveSlots];
+    }
 }
 
 @end
