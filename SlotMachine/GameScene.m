@@ -16,6 +16,7 @@
 @property (nonatomic)         CGFloat           timeDecayRate;
 @property (nonatomic, strong) NSMutableArray    *slotSpeeds;
 @property (nonatomic, strong) NSMutableArray    *slotSpriteNodes;
+@property (nonatomic)         BOOL              slotsDoneSpinning;
 @end
 
 @implementation GameScene
@@ -23,7 +24,7 @@
 -(void)didMoveToView:(SKView *)view {
     
     self.timeDecayRate = 0.99;
-    
+    self.slotsDoneSpinning = NO;
     self.slotSpeeds = [@[] mutableCopy];
     self.slotSpriteNodes = [@[] mutableCopy];
     
@@ -100,6 +101,8 @@
             slotNode.position = CGPointMake(slotNode.position.x, slotNode.position.y + slotNode.size.height * 2);
             
         } else if (slotNode.position.y <= 0.5 && amtToMove.y == -2.0) {
+            // otherwise slot is now at the lowest speed at which it will still move, and sliding one final loop until clicking into place
+            // and stopping
             amtToMove.y = 0;
             slotNode.position = CGPointMake(slotNode.position.x, 0.0);
         }
