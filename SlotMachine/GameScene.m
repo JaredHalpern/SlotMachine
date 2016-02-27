@@ -69,33 +69,43 @@
         [self.slotSpriteNodes addObject:self.spriteNode];
         [effectNode addChild:self.spriteNode];
         [self addChild:effectNode];
-        startingX += self.spriteNode.size.width + 8.0;
+        startingX += self.spriteNode.size.width + 0.0;
     }
+    NSLog(@"slot height: %f", self.spriteNode.size.height);
 }
 
 - (void)moveSlots {
     
-    __block NSInteger nodeNum = 0;
-//    __weak GameScene *welf = self;
+    NSInteger nodeNum = 0;
 
     for (SKSpriteNode *node in self.slotSpriteNodes) {
     
         SKSpriteNode *slotNode = (SKSpriteNode *)node;
-        
         CGPoint slotVelocity = CGPointMake(0, ([self.slotSpeeds[nodeNum] integerValue]));
+        CGPoint amtToMove = CGPointMake(slotVelocity.x, slotVelocity.y * self.timeDiff);
+        
         self.slotSpeeds[nodeNum] = @(slotVelocity.y * self.timeDecayRate);
         
-//        NSLog(@"%")
-        
-        CGPoint amtToMove = CGPointMake(slotVelocity.x, slotVelocity.y * self.timeDiff);
+        if (amtToMove.y >= -2.0) { // when we start slowing down; ie: between -2.0 and 0.0
+            
+                NSLog(@"position.y %f", slotNode.position.y);
+                amtToMove.y = -2.0;
+        }
+    
+        // move slot
         slotNode.position = CGPointMake(slotNode.position.x, slotNode.position.y + amtToMove.y);
         
-        //Checks if node is completely scrolled of the screen, if yes then put it at the top of the node
+        // Checks if node is completely scrolled of the screen, if yes then put it at the top of the node
         if (slotNode.position.y <= -slotNode.size.height) {
             slotNode.position = CGPointMake(slotNode.position.x, slotNode.position.y + slotNode.size.height * 2);
+            
+        } else if (slotNode.position.y <= 0.5 && amtToMove.y == -2.0) {
+            amtToMove.y = 0;
+            slotNode.position = CGPointMake(slotNode.position.x, 0.0);
         }
         
         nodeNum++;
+    
         if (nodeNum >= self.slotSpeeds.count) {
             nodeNum = 0;
         }
